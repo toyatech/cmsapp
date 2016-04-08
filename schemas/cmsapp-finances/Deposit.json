@@ -10,6 +10,9 @@
     "type": {
       "$ref": "http://toyatech.net/cmsapp/finances/DepositType"
     },
+    "amount": {
+      "type": "number"
+    },
     "comment": {
       "type": "string"
     },
@@ -19,6 +22,7 @@
   },
   "required": [
     "date",
-    "type"
+    "type",
+    "amount"
   ]
 }
