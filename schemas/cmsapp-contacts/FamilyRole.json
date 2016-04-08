@@ -1,6 +1,6 @@
 {
   "$schema": "http://json-schema.org/draft-04/schema#",
-  "id": "http://toyatech.net/cmsapp/contacts/FamilyRole"
+  "id": "http://toyatech.net/cmsapp/contacts/FamilyRole",
   "type": "object",
   "properties": {
     "name": {
