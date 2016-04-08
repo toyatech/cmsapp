@@ -27,7 +27,7 @@
     },
     "address": {
       "$ref": "#/defiitions/PostalAddress"
-    }
+    },
     "homePhone": {
       "type": "string"
     },
@@ -71,5 +71,11 @@
     "classification": {
       "$ref": "http://toyatech.net/cmsapp/contacts/Classification"
     }
-  }
+  },
+  "required": [
+    "givenName",
+    "gender",
+    "family",
+    "familyRole"
+  ]
 }
