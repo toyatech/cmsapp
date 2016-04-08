@@ -24,7 +24,7 @@
     },
     "query": {
       "$ref": "#/Query"
-    }
+    },
     "source": {
       "type": "string"
     }
