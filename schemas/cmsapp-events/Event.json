@@ -26,5 +26,9 @@
         "$ref": "#/definitions/AttendanceRecord"
       }
     }
-  }
+  },
+  "required": [
+    "title",
+    "type"
+  ]
 }
