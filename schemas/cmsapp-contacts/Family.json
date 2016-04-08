@@ -11,10 +11,10 @@
         "items": {
           "$ref": "#/Person"
         }
-      ],
+      },
       "address": {
         "$ref": "$/definitions/PostalAddress"
-      }
+      },
       "homePhone": {
         "type": "string"
       },
