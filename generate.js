@@ -17,7 +17,7 @@ const templates = {
 
 const schemas = {
   'cmsapp-contacts': {
-    'Church': require(schemasDir + 'cmsapp-contacts/Church.json')
+    'Church': require(schemasDir + 'cmsapp-contacts/Person.json')
   }
 }
 
