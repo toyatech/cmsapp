@@ -35,7 +35,7 @@
         },
         "end": {
           "type": "string",
-          "format" "date-time"
+          "format": "date-time"
         },
         "rules": {
           "type": "array",
