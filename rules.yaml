@@ -1,0 +1,261 @@
+functions:
+
+schema:
+  definitions:
+    NamedType:
+      type: object
+      properties:
+        name:
+          type: string
+        description:
+          type: string
+        order:
+          type: number
+      required: 
+        [ name, type, order ]
+      additionalProperties: false
+    PostalAddress:
+      type: object
+      properties:
+        street:
+          type: string
+        locality:
+          type: string
+        region:
+          type: string
+        postalCode:
+          type: string
+        postOfficeBox:
+          type: string
+        country:
+          type: string
+      required: 
+        [ street, locality, region, postalCode ]
+      additionalProperties: false
+    RecurrancePattern:
+      type: object
+      properties:
+        start:
+          type: string
+          format: datetime
+        end:
+          type: string
+          format: datetime
+        rules:
+          $ruleId:
+            { $ref: "#/definitions/recurranceRule" }
+        exceptions:
+          $exceptionId:
+            type: object
+            properties:
+              name:
+                type: string
+              date:
+                type: string
+                format: datetime
+    RecurranceRule:
+      type: object
+      properties:
+        units:
+          type: number
+        measure:
+          type: string  
+  
+  type: object
+  $churchId:
+    type: object
+    properties:
+      name:
+        type: string
+      address: 
+        { $ref: "#/definitions/PostalAddress" }
+      contacts:
+        type: object
+        properties:
+          families:
+            type: object
+            $familyId:
+              type: object
+              properties:
+                familyName:
+                  type: string
+                familyMembers:
+                  type: object
+                address: 
+                  { $ref: "#/definitions/PostalAddress" }
+                homePhone:
+                  type: string
+                emailAddress:
+                  type: string
+                marriageDate:
+                  type: string
+                  format: datetime
+          people:
+            type: object
+            $personId:
+              type: object
+              properties:
+                title:
+                  type: string
+                givenName:
+                  type: string
+                additionalName:
+                  type: string
+                familyName:
+                  type: string
+                suffix:
+                  type: string
+                gender:
+                  type: string
+                  enum: [ male, female ]
+                address: 
+                  { "#/definitions/PostalAddress" }
+                homePhone:
+                  type: string
+                mobilePhone:
+                  type: string
+                workPhone:
+                  type: string
+                emailAddress:
+                  type: string
+                family:
+                  $familyId
+                familyRole:
+                  $familyRoleId
+                birthDayOfMonth:
+                  type: number
+                  minimum: 1
+                  maximum: 31
+                birthMonth:
+                  type: number
+                  minimum: 1
+                  maximum: 12
+                birthYear:
+                  type: number
+                firstContactDate:
+                  type: string
+                  format: datetime
+                membershipDate:
+                  type: string
+                  format: datetime
+                classification:
+                  $classificationId
+          familyRoles:
+            type: object
+            $familyRole:
+              { $ref: "#/definitions/NamedType" }
+          classifications:
+            type: object
+            $classification:
+              { $ref: "#/definitions/NamedType" }
+      groups:
+        type: object
+        $groupId:
+          type: object
+          properties:
+            name:
+              type: string
+            description:
+              type: string
+            type:
+              $groupTypeId
+            roles:
+              $roleId:
+                { $ref: "#/definitions/NamedType" }
+            members:
+              $memberId
+                type: object
+                properties:
+                  person: 
+                    type: string
+                  role:
+                    type: string
+        groupTypes:
+          $groupTypeId:
+            { $ref: "#/definitions/NamedType" } 
+      events:
+        type: object
+        $eventId:
+          type: object
+          properties:
+            type:
+              type: string
+            title:
+              type: string
+            description:
+              type: string
+            startDateTime:
+              type: string
+              format: datetime
+            endDateTime:
+              type: string
+              format: datetime
+            attendance:
+              type: object
+        eventTypes:
+          $eventTypeId:
+            type: object
+            properties:
+              name:
+                type: string
+              recurrancePattern:
+                { $ref: "#/definitions/RecurrancePattern" }
+              defaultStartTime:
+                type: string
+              attendanceCounts:
+                { $ref: "#/defiitions/NamedType" }
+              groupEvent:
+                type: boolean
+              group:
+                type: string
+      finances:
+        type: object
+        properties:
+          campaigns:
+            $campaignId:
+              type: object
+              properties:
+                name:
+                  type: string
+                description:
+                  type: string
+                goal:
+                  type: number
+                pledges:
+                  $pledgeId:
+                    type: object
+                    properties:
+                      person: string
+                      amount: number
+          deposits:
+            $depositId:
+              type: object
+              properties:
+                date:
+                  type: string
+                  format: datetime
+                type:
+                  type: string
+            depositTypes:
+              $depositTypeId:
+                { $ref: "#/definitions/NamedType" }
+      reports:
+        type: object
+        properties:
+          $reportId:
+            type: object
+            properties:
+              name:
+                type: string
+              description:
+                type: string
+              query:
+                type: string
+              source:
+                type: string
+  users:
+    $userId:
+
+access:
+  - location: $churchId/
+    read: $
