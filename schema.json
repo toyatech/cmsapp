@@ -1,0 +1,263 @@
+{
+  "definitions": {
+    "NamedType": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "order": {
+          "type": "number"
+        }
+      },
+      "required": [
+        "name",
+        "description",
+        "order"
+      ]
+    },
+    "PostalAddress": {
+      "type": "object",
+      "properties": {
+        "street": {
+          "type": "string"
+        },
+        "locality": {
+          "type": "string"
+        },
+        "region": {
+          "type": "string"
+        },
+        "postalCode": {
+          "type": "string"
+        },
+        "postOfficeBox": {
+          "type": "string"
+        }
+      }
+    },
+    "Church": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "address": {
+          "$ref": "#/definitions/PostalAddress"
+        },
+        "contacts": {
+          "type": "object",
+          "properties": {
+            "families": {
+              "type": "object",
+              "additionalProperties": {
+                "$ref": "#/definitions/Family"
+              }
+            },
+            "people": {
+              "type": "object",
+              "additionalProperties": {
+                "$ref": "#/definitions/Person"
+              }
+            }
+          }
+        },
+        "groups": {
+        },
+        "events": {
+        },
+        "finances": {
+        },
+        "reports": {
+        }
+      }
+    },
+    "Family": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "members": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "address": {
+          "$ref": "#/definitions/PostalAddress"
+        },
+        "homePhone": {
+          "type": "string"
+        },
+        "emailAddress": {
+          "type": "string"
+        }
+      }
+    },
+    "Person": {
+      "type": "object",
+      "properties": {
+        "title": {
+          "type": "string"
+        },
+        "givenName": {
+          "type": "string"
+        },
+        "additionalName": {
+          "type": "string"
+        },
+        "familyName": {
+          "type": "string"
+        },
+        "suffix": {
+          "type": "string"
+        },
+        "gender": {
+          "type": "string",
+          "enum": [
+            "Male",
+            "Female"
+          ]
+        },
+        "address": {
+          "$ref": "#/definitions/PostalAddress"
+        },
+        "homePhone": {
+          "type": "string"
+        },
+        "mobilePhone": {
+          "type": "string"
+        },
+        "workPhone": {
+          "type": "string"
+        },
+        "emailAddress": {
+          "type": "string",
+          "format": "email"
+        },
+        "family": {
+          "type": "string"
+        },
+        "birthDayOfMonth": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 31
+        },
+        "birthMonth": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 12
+        },
+        "birthYear": {
+          "type": "integer"
+        },
+        "firstContactDate": {
+          "type": "string",
+          "format": "data-time"
+        },
+        "membershipDate": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "classification": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "givenName",
+        "gender",
+        "family",
+        "classification"
+      ]
+    },
+    "Group": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string"
+        },
+        "roles": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/NamedType"
+          }
+        },
+        "members": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/GroupMember"
+          }
+        }
+      }
+    },
+    "GroupMember": {
+      "type": "object",
+      "properties": {
+        "person": {
+          "type": "string"
+        },
+        "role": {
+          "type": "string"
+        }
+      }
+    },
+    "Event": {
+      "type": "object",
+      "properties": {
+        "title": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string"
+        },
+        "startDateTime": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "endDateTime": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    }
+  },
+  "type": "object",
+  "properties": {
+    "users": {},
+    "churches": {
+      "type": "object",
+      "additionalProperties": {
+        "$ref": "#/definitions/Church"
+      }
+    },
+    "defaults": {
+      "type": "object",
+      "properties": {
+        "reports": {
+     
+        }
+      }
+    }
+  },
+  "links": [
+    {
+      "href": "/churches"
+    },
+    {
+      "href": "/churches/{churchId}"
+    }
+  ]
+}
