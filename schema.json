@@ -236,6 +236,23 @@
   },
   "type": "object",
   "properties": {
+    "contacts": {
+      "type": "object",
+      "links": [
+        {
+          "rel": "self",
+          "href": "/churches",
+          "method":
+      ]
+    },
+    "groups": {
+    },
+    "events": {
+    },
+    "finances": {
+    },
+    "reports": {
+    },
     "users": {},
     "churches": {
       "type": "object",
